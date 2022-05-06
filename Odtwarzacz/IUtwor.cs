@@ -8,5 +8,10 @@ namespace Odtwarzacz
 {
     internal interface IUtwor
     {
+        int IdUtworu { get; set; }
+        string Tytul { get; set; }
+        string Wykonawca { get; set; }
+        string NazwaPlyty { get; set; }
+        DateTime DlugoscUtworu { get; set; }
     }
 }

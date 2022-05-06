@@ -8,5 +8,6 @@ namespace Odtwarzacz
 {
     internal interface IOdtwarzacz
     {
+        
     }
 }
