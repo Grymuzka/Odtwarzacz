@@ -10,6 +10,11 @@ namespace Odtwarzacz
     {
         static void Main(string[] args)
         {
+            IUtwor u1 = new Utwor(1, "Dom", "Bitamina", "Kawalerka", 22230);
+
+            u1.WyswietlDaneUtworu();
+
+            Console.ReadKey();
         }
     }
 }
