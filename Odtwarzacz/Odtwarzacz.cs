@@ -30,6 +30,7 @@ namespace Odtwarzacz
         }
 
         public string PlikZHistoria { get; set; }
+
         private List<IUtwor> historia;
         public List<IUtwor> Historia
         {
@@ -47,12 +48,14 @@ namespace Odtwarzacz
 
         public OdtworzonoUtwor OnOdtworzonoUtwor { get; set; }
 
-        public void OdtworzUtwor(int idUtworu)
+        public IUtwor OdtworzUtwor(int idUtworu)
         {
-            OdtwarzanyUtwor.Id = idUtworu;
+            OdtwarzanyUtwor.IdUtworu = idUtworu;
             Historia.Add(OdtwarzanyUtwor);
             ZapiszHistorieWPliku();
             OnOdtworzonoUtwor?.Invoke(this);
+
+            return OdtwarzanyUtwor;
         }
         public void ZapiszHistorieWPliku()
         {
@@ -60,14 +63,36 @@ namespace Odtwarzacz
             File.WriteAllText("historia.txt", tresc);
         }
 
-        public void DodajLubUsunUtwor()
+        public void ZwiekszGlosnosc()
         {
-            throw new NotImplementedException();
+            PoziomGlosnosci += 1;
+            if (PoziomGlosnosci > 100) 
+                PoziomGlosnosci = 100;
+        }
+        public void ZmniejszGlosnosc()
+        {
+            PoziomGlosnosci -= 1;
+            if (PoziomGlosnosci < 0)
+                PoziomGlosnosci = 0;
         }
 
-        public void ZmienGloscnosc(int wartosc)
+        public Odtwarzacz(int glosnosc, IUtwor odtutwor)
         {
-            PoziomGlosnosci += wartosc;
+            PoziomGlosnosci = glosnosc;
+            OdtwarzanyUtwor = odtutwor;
+        }
+
+
+        public void ZapiszPlayliste(string nazwaPliku)
+        {
+            string playlistaTekst = JsonConvert.SerializeObject(Playlista);
+            System.IO.File.WriteAllText(nazwaPliku, playlistaTekst);  //serializacja na tekst
+        }
+
+        public List<IUtwor> OdczytajPlayliste(string nazwaPliku)
+        {
+            string playlistaTekst = System.IO.File.ReadAllText(nazwaPliku);
+            return JsonConvert.DeserializeObject<List<IUtwor>>(playlistaTekst);
         }
 
     }

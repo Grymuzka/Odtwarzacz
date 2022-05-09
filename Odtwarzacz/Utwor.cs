@@ -8,24 +8,24 @@ namespace Odtwarzacz
 {
     public class Utwor : IUtwor
     {
-        public int Id { get; set; }
-        public string Tyt { get; set; }
-        public string Wyk { get; set; }
-        public string Nazwa { get; set; }
-        public float Dlugosc { get; set; }
+        public int IdUtworu { get; set; }
+        public string TytulUtworu { get; set; }
+        public string Wykonawca { get; set; }
+        public string NazwaPlyty { get; set; }
+        public float DlugoscUtworu { get; set; }
 
-        public Utwor(int IdUtworu, string Tytul, string Wykonawca, string NazwaPlyty, float DlugoscUtworu)
+        public Utwor(int Id, string Tyt, string Wyk, string Nazwa, float Dlugosc)
         {
-            Id = IdUtworu;
-            Tyt = Tytul;
-            Wyk = Wykonawca;
-            Nazwa = NazwaPlyty;
-            Dlugosc = DlugoscUtworu;
+            IdUtworu = Id;
+            TytulUtworu = Tyt;
+            Wykonawca = Wyk;
+            NazwaPlyty = Nazwa;
+            DlugoscUtworu = Dlugosc;
         }
 
         public void WyswietlDaneUtworu()
         {
-            Console.WriteLine($"{Tyt}, {Wyk}, {Nazwa}, {Dlugosc}");
+            Console.WriteLine($"{TytulUtworu}, {Wykonawca}, {NazwaPlyty}, {DlugoscUtworu}");
         }
     }
 }
