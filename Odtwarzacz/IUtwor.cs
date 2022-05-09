@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Odtwarzacz
 {
-    internal interface IUtwor
+    public interface IUtwor
     {
         int Id { get; set; }
         string Tyt { get; set; }

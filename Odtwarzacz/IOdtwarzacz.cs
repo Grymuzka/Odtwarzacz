@@ -6,17 +6,17 @@ using System.Threading.Tasks;
 
 namespace Odtwarzacz
 {
-    internal interface IOdtwarzacz
+    public interface IOdtwarzacz
     {
         int PoziomGlosnosci { get; set; }
-        void ZwiekszGloscnosc();
-        void ZmniejszGlosnosc();
+        void ZmienGloscnosc(int wartosc);
         IUtwor OdtwarzanyUtwor { get; set; }
-        void ZmienUtwor();
+        void OdtworzUtwor(int idUtworu);
         List<IUtwor> Playlista { get; set; }
-        void DodajLubUsunUtworDoPlaylisty();
+        void DodajLubUsunUtwor();
+        string PlikZHistoria { get; set; }
         List<IUtwor> Historia { get; set; }
-        void DodajUtworDoHistorii();
+        void ZapiszHistorieWPliku();
 
 
 
