@@ -16,6 +16,7 @@ namespace Odtwarzacz
         List<IUtwor> Playlista { get; set; }
         string PlikZHistoria { get; set; }
         List<IUtwor> Historia { get; set; }
+        OdtworzonoUtwor OnOdtworzonoUtwor { get; set; }
         void ZapiszHistorieWPliku();
         void ZapiszPlayliste(string nazwaPliku);
         List<IUtwor> OdczytajPlayliste(string nazwaPliku);

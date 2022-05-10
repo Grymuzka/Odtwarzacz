@@ -26,6 +26,7 @@ namespace Odtwarzacz
             //o1.ZapiszPlayliste("playlista.txt");
             o1.Playlista = o1.OdczytajPlayliste("playlista.txt");
 
+            o1.OnOdtworzonoUtwor += OdtworzonoUtwor;
             o1.OdtworzUtwor(3);
             o1.OdtworzUtwor(2);
             o1.OdtworzUtwor(3);
@@ -38,6 +39,16 @@ namespace Odtwarzacz
 
             Console.ReadKey();
         }
-        
+
+        public static void OdtworzonoUtwor(object u)
+        {
+            string nazwaUtworu = null;
+            if (u is Utwor)
+            {
+                nazwaUtworu = (u as Utwor).TytulUtworu;
+            }
+            Console.WriteLine($"Aktualnie odtwarzany: {nazwaUtworu}");
+        }
+
     }
 }
