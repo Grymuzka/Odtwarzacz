@@ -11,10 +11,14 @@ namespace Odtwarzacz
     public delegate void OdtworzonoUtwor(object u);
     public class Odtwarzacz : IOdtwarzacz
     {
+        [JsonIgnore]
         public int PoziomGlosnosci { get; set; }
+        [JsonIgnore]
         public IUtwor OdtwarzanyUtwor { get; set; }
 
+        [JsonIgnore]
         private List<IUtwor> playlista;
+        [JsonIgnore]
         public List<IUtwor> Playlista
         {
             get
@@ -29,6 +33,7 @@ namespace Odtwarzacz
             }
         }
 
+        [JsonIgnore]
         public string PlikZHistoria { get; set; }
 
         private List<IUtwor> historia;
@@ -46,11 +51,18 @@ namespace Odtwarzacz
             }
         }
 
+        [JsonIgnore]
         public OdtworzonoUtwor OnOdtworzonoUtwor { get; set; }
-
-        public IUtwor OdtworzUtwor(int idUtworu)
+        public IUtwor OdtworzUtwor(int id)
         {
-            OdtwarzanyUtwor.IdUtworu = idUtworu;
+            foreach (IUtwor i in Playlista) 
+            {
+                if(i.IdUtworu == id)
+                {
+                    OdtwarzanyUtwor = i;
+                    break;
+                }
+            }
             Historia.Add(OdtwarzanyUtwor);
             ZapiszHistorieWPliku();
             OnOdtworzonoUtwor?.Invoke(this);
@@ -62,7 +74,10 @@ namespace Odtwarzacz
             string tresc = JsonConvert.SerializeObject(this, Formatting.Indented);
             File.WriteAllText("historia.txt", tresc);
         }
-
+        public void WyswietlDaneOdtwarzanegoUtworu()
+        {
+            Console.WriteLine($"{OdtwarzanyUtwor.TytulUtworu}, {OdtwarzanyUtwor.Wykonawca}, {OdtwarzanyUtwor.NazwaPlyty}, {OdtwarzanyUtwor.DlugoscUtworu}");
+        }
         public void ZwiekszGlosnosc()
         {
             PoziomGlosnosci += 1;
@@ -75,24 +90,26 @@ namespace Odtwarzacz
             if (PoziomGlosnosci < 0)
                 PoziomGlosnosci = 0;
         }
-
-        public Odtwarzacz(int glosnosc, IUtwor odtutwor)
-        {
-            PoziomGlosnosci = glosnosc;
-            OdtwarzanyUtwor = odtutwor;
-        }
-
-
         public void ZapiszPlayliste(string nazwaPliku)
         {
             string playlistaTekst = JsonConvert.SerializeObject(Playlista);
             System.IO.File.WriteAllText(nazwaPliku, playlistaTekst);  //serializacja na tekst
         }
-
         public List<IUtwor> OdczytajPlayliste(string nazwaPliku)
         {
             string playlistaTekst = System.IO.File.ReadAllText(nazwaPliku);
-            return JsonConvert.DeserializeObject<List<IUtwor>>(playlistaTekst);
+            List<IUtwor> r = new List<IUtwor>();
+            foreach (IUtwor u in JsonConvert.DeserializeObject<List<Utwor>>(playlistaTekst))
+            {
+                r.Add(u);
+            }
+            return r;
+        }
+
+        public Odtwarzacz(int glosnosc, IUtwor odtutwor)
+        {
+            PoziomGlosnosci = glosnosc;
+            OdtwarzanyUtwor = odtutwor;
         }
 
     }

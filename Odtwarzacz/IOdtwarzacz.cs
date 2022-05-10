@@ -8,17 +8,18 @@ namespace Odtwarzacz
 {
     public interface IOdtwarzacz
     {
-        int PoziomGlosnosci { get; set; }
+        int PoziomGlosnosci { get;  set; }
         void ZwiekszGlosnosc();
         void ZmniejszGlosnosc();
         IUtwor OdtwarzanyUtwor { get; set; }
-        IUtwor OdtworzUtwor(int idUtworu);
+        IUtwor OdtworzUtwor(int id);
         List<IUtwor> Playlista { get; set; }
         string PlikZHistoria { get; set; }
         List<IUtwor> Historia { get; set; }
         void ZapiszHistorieWPliku();
         void ZapiszPlayliste(string nazwaPliku);
         List<IUtwor> OdczytajPlayliste(string nazwaPliku);
+        void WyswietlDaneOdtwarzanegoUtworu();
 
 
 

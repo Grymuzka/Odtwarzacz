@@ -23,9 +23,5 @@ namespace Odtwarzacz
             DlugoscUtworu = Dlugosc;
         }
 
-        public void WyswietlDaneUtworu()
-        {
-            Console.WriteLine($"{TytulUtworu}, {Wykonawca}, {NazwaPlyty}, {DlugoscUtworu}");
-        }
     }
 }

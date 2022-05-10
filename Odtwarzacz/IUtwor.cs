@@ -13,6 +13,5 @@ namespace Odtwarzacz
         string Wykonawca { get; set; }
         string NazwaPlyty { get; set; }
         float DlugoscUtworu { get; set; }
-        void WyswietlDaneUtworu();
     }
 }
