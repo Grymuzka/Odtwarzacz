@@ -11,9 +11,9 @@ namespace Odtwarzacz
     {
         static void Main(string[] args)
         {
-            IUtwor u1 = new Utwor(1, "Dom", "Bitamina", "Kawalerka", 22230);
+            IUtwor u1 = new Utwor(1, "Dom", "Bitamina", "Kawalerka", 56735); //WYWOŁANIE KONSTRUKTORA
             IUtwor u2 = new Utwor(2, "Klopot", "Problem", "Nieznany", 23424);
-            IUtwor u3 = new Utwor(3, "Yellow", "Coldplay", "Parachutes", 44423);
+            IUtwor u3 = new Utwor(3, "Yellow", "Coldplay", "Parachutes", 4456);
 
             IOdtwarzacz o1 = new Odtwarzacz(50, u1);
 
@@ -27,27 +27,26 @@ namespace Odtwarzacz
             o1.Playlista = o1.OdczytajPlayliste("playlista.txt");
 
             o1.OnOdtworzonoUtwor += OdtworzonoUtwor;
-            o1.OdtworzUtwor(3);
-            o1.OdtworzUtwor(2);
-            o1.OdtworzUtwor(3);
 
-            Console.WriteLine("**********************************************************");
-
-            Console.WriteLine($"Obecny poziom głośności wynosi: { o1.PoziomGlosnosci} %");
-
-            o1.WyswietlDaneOdtwarzanegoUtworu();
+            Console.WriteLine("****************\n");
+            Console.WriteLine($"Obecny poziom głośności wynosi: { o1.PoziomGlosnosci} % \n");
+            Console.WriteLine("****************");
+            o1.OdtworzUtwor(u2);
+            o1.OdtworzUtwor(u1);
+            o1.OdtworzUtwor(u3);
+            o1.WyswietlDlugoscPlaylisty();
 
             Console.ReadKey();
         }
 
-        public static void OdtworzonoUtwor(object u)
+        public static void OdtworzonoUtwor(IUtwor u)
         {
-            string nazwaUtworu = null;
+            IUtwor utwor = null;
             if (u is Utwor)
             {
-                nazwaUtworu = (u as Utwor).TytulUtworu;
+                utwor = u as Utwor;
             }
-            Console.WriteLine($"Aktualnie odtwarzany: {nazwaUtworu}");
+            Console.WriteLine($" Aktualnie odtwarzany: \n  Tytuł: {utwor.TytulUtworu}\n  Autor: {utwor.Wykonawca} \n  Nazwa płyty: {utwor.NazwaPlyty} \n  Czas trwania: {utwor.DlugoscUtworu}\n");
         }
 
     }

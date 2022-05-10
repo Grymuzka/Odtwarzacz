@@ -12,17 +12,14 @@ namespace Odtwarzacz
         void ZwiekszGlosnosc();
         void ZmniejszGlosnosc();
         IUtwor OdtwarzanyUtwor { get; set; }
-        IUtwor OdtworzUtwor(int id);
+        OdtworzonoUtwor OnOdtworzonoUtwor { get; set; }
+        IUtwor OdtworzUtwor(IUtwor utwor);
         List<IUtwor> Playlista { get; set; }
+        void WyswietlDlugoscPlaylisty();
         string PlikZHistoria { get; set; }
         List<IUtwor> Historia { get; set; }
-        OdtworzonoUtwor OnOdtworzonoUtwor { get; set; }
         void ZapiszHistorieWPliku();
         void ZapiszPlayliste(string nazwaPliku);
         List<IUtwor> OdczytajPlayliste(string nazwaPliku);
-        void WyswietlDaneOdtwarzanegoUtworu();
-
-
-
     }
 }

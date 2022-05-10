@@ -8,19 +8,17 @@ namespace Odtwarzacz
 {
     public class Utwor : IUtwor
     {
-        public int IdUtworu { get; set; }
         public string TytulUtworu { get; set; }
         public string Wykonawca { get; set; }
         public string NazwaPlyty { get; set; }
-        public float DlugoscUtworu { get; set; }
+        public float DlugoscUtworu { get; set; } //MOWA O TEJ ZMIENNEJ
 
-        public Utwor(int Id, string Tyt, string Wyk, string Nazwa, float Dlugosc)
+        public Utwor(int id, string tyt, string wyk, string nazwa, float dlugosc)
         {
-            IdUtworu = Id;
-            TytulUtworu = Tyt;
-            Wykonawca = Wyk;
-            NazwaPlyty = Nazwa;
-            DlugoscUtworu = Dlugosc;
+            TytulUtworu = tyt;
+            Wykonawca = wyk;
+            NazwaPlyty = nazwa;
+            DlugoscUtworu = dlugosc;
         }
 
     }

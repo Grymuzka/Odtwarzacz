@@ -8,11 +8,11 @@ using Newtonsoft.Json;
 
 namespace Odtwarzacz 
 {
-    public delegate void OdtworzonoUtwor(object u);
+    public delegate void OdtworzonoUtwor(IUtwor u);
     public class Odtwarzacz : IOdtwarzacz
     {
         [JsonIgnore]
-        public int PoziomGlosnosci { get; set; }
+        public int PoziomGlosnosci { get; set; } 
         [JsonIgnore]
         public IUtwor OdtwarzanyUtwor { get; set; }
 
@@ -31,6 +31,18 @@ namespace Odtwarzacz
             {
                 playlista = value;
             }
+        }
+
+        public void WyswietlDlugoscPlaylisty()
+        {
+            playlista = this.Playlista;
+            float dlugoscPlaylisty = 0;
+            foreach(IUtwor u in playlista)
+            {
+                dlugoscPlaylisty += u.DlugoscUtworu;
+            }
+
+            Console.WriteLine($"Czas trwania playlisty wynosi : {dlugoscPlaylisty}");
         }
 
         [JsonIgnore]
@@ -53,19 +65,19 @@ namespace Odtwarzacz
 
         [JsonIgnore]
         public OdtworzonoUtwor OnOdtworzonoUtwor { get; set; }
-        public IUtwor OdtworzUtwor(int id)
+        public IUtwor OdtworzUtwor(IUtwor utwor)
         {
-            foreach (IUtwor i in Playlista) 
+            foreach (IUtwor u in Playlista) 
             {
-                if(i.IdUtworu == id)
+                if(u == utwor)
                 {
-                    OdtwarzanyUtwor = i;
+                    OdtwarzanyUtwor = u;
                     break;
                 }
             }
             Historia.Add(OdtwarzanyUtwor);
             ZapiszHistorieWPliku();
-            OnOdtworzonoUtwor?.Invoke(this);
+            OnOdtworzonoUtwor?.Invoke(utwor);
 
             return OdtwarzanyUtwor;
         }
@@ -73,10 +85,6 @@ namespace Odtwarzacz
         {
             string tresc = JsonConvert.SerializeObject(this, Formatting.Indented);
             File.WriteAllText("historia.txt", tresc);
-        }
-        public void WyswietlDaneOdtwarzanegoUtworu()
-        {
-            Console.WriteLine($"{OdtwarzanyUtwor.TytulUtworu}, {OdtwarzanyUtwor.Wykonawca}, {OdtwarzanyUtwor.NazwaPlyty}, {OdtwarzanyUtwor.DlugoscUtworu}");
         }
         public void ZwiekszGlosnosc()
         {

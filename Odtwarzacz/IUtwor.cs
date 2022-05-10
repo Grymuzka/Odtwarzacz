@@ -8,7 +8,6 @@ namespace Odtwarzacz
 {
     public interface IUtwor
     {
-        int IdUtworu { get; set; }
         string TytulUtworu { get; set; }
         string Wykonawca { get; set; }
         string NazwaPlyty { get; set; }
