@@ -14,6 +14,8 @@ namespace Odtwarzacz
         IUtwor OdtwarzanyUtwor { get; set; }
         OdtworzonoUtwor OnOdtworzonoUtwor { get; set; }
         IUtwor OdtworzUtwor(IUtwor utwor);
+        void KolejnyUtwor();
+        void PoprzedniUtwor();
         List<IUtwor> Playlista { get; set; }
         void WyswietlDlugoscPlaylisty();
         string PlikZHistoria { get; set; }

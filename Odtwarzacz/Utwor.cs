@@ -11,9 +11,9 @@ namespace Odtwarzacz
         public string TytulUtworu { get; set; }
         public string Wykonawca { get; set; }
         public string NazwaPlyty { get; set; }
-        public float DlugoscUtworu { get; set; } //MOWA O TEJ ZMIENNEJ
+        public TimeSpan DlugoscUtworu { get; set; } //MOWA O TEJ ZMIENNEJ
 
-        public Utwor(int id, string tyt, string wyk, string nazwa, float dlugosc)
+        public Utwor(string tyt, string wyk, string nazwa, TimeSpan dlugosc)
         {
             TytulUtworu = tyt;
             Wykonawca = wyk;

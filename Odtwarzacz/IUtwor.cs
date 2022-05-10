@@ -11,6 +11,6 @@ namespace Odtwarzacz
         string TytulUtworu { get; set; }
         string Wykonawca { get; set; }
         string NazwaPlyty { get; set; }
-        float DlugoscUtworu { get; set; }
+        TimeSpan DlugoscUtworu { get; set; }
     }
 }

@@ -36,7 +36,7 @@ namespace Odtwarzacz
         public void WyswietlDlugoscPlaylisty()
         {
             playlista = this.Playlista;
-            float dlugoscPlaylisty = 0;
+            TimeSpan dlugoscPlaylisty = new TimeSpan(0, 0, 0);
             foreach(IUtwor u in playlista)
             {
                 dlugoscPlaylisty += u.DlugoscUtworu;
@@ -80,6 +80,40 @@ namespace Odtwarzacz
             OnOdtworzonoUtwor?.Invoke(utwor);
 
             return OdtwarzanyUtwor;
+        }
+        public void KolejnyUtwor()
+        {
+            int i = 0;
+            int index = 0;
+            foreach (IUtwor u in Playlista)
+            {
+                if (u == OdtwarzanyUtwor)
+                {
+                    index = i;
+                }
+                i++;
+            }
+
+            if ((index + 1) <= Playlista.Count)
+                OdtworzUtwor(Playlista[index + 1]);
+            else Console.WriteLine("Brak następnego utworu");
+        }
+        public void PoprzedniUtwor()
+        {
+            int i = 0;
+            int index = 0;
+            foreach (IUtwor u in Playlista)
+            {
+                if (u == OdtwarzanyUtwor)
+                {
+                    index = i;
+                }
+                i++;
+            }
+
+            if ((index - 1) >= 0)
+                OdtworzUtwor(Playlista[index - 1]);
+            else Console.WriteLine("Brak poprzedniego utworu");
         }
         public void ZapiszHistorieWPliku()
         {
